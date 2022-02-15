@@ -43,7 +43,23 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  res.send("Weather page");
+  res.render({ forecast: "It is raining here.", location: "Mumbai" });
+});
+
+app.get("/help/*", (req, res) => {
+  res.render("pageNotFound", {
+    title: "404",
+    name: "Aayush Kumar",
+    msg: "Help article not found.",
+  });
+});
+
+app.get("*", (req, res) => {
+  res.render("pageNotFound", {
+    title: "404",
+    name: "Aayush Kumar",
+    msg: "Page not found",
+  });
 });
 
 app.listen(3000, () => {
