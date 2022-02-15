@@ -10,18 +10,23 @@ const app = express();
 
 const publicDirPath = path.join(__dirname, "../public");
 
+app.set("view engine", "hbs");
+
 app.use(express.static(publicDirPath));
 
 app.get("/", (req, res) => {
-  res.send("Hello Express !");
+  res.render("index", {
+    title: "Weather",
+    name: "Aayush Kumar",
+  });
 });
 
 app.get("/help", (req, res) => {
-  res.send("Help page");
+  res.render("help", { helpText: "This is a helpful text" });
 });
 
 app.get("/about", (req, res) => {
-  res.send("About page");
+  res.render("about", { title: "About me", name: "aayush" });
 });
 
 app.get("/weather", (req, res) => {
