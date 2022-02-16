@@ -42,15 +42,22 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About me", name: "Aayush Kumar" });
 });
 
-app.get("/weather", (req, res) => {
-  res.render({ forecast: "It is raining here.", location: "Mumbai" });
-});
-
 app.get("/help/*", (req, res) => {
   res.render("pageNotFound", {
     title: "404",
     name: "Aayush Kumar",
     msg: "Help article not found.",
+  });
+});
+
+app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({ error: "Please provide a valid address" });
+  }
+  res.send({
+    forecast: "It is raining here.",
+    location: "Mumbai",
+    address: req.query.address,
   });
 });
 
